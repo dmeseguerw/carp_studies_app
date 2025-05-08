@@ -51,6 +51,17 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
 
     protocol.addConnectedDevice(locationService, phone);
 
+    // Add polar device
+    var polar = PolarDevice(roleName: 'Polar HR Sensor');
+    protocol.addConnectedDevice(polar, phone);
+    protocol.addTaskControl(
+    ImmediateTrigger(),
+    BackgroundTask(measures: [
+      Measure(type: PolarSamplingPackage.HR),
+      // Measure(type: PolarSamplingPackage.ECG),
+    ]),
+    polar);
+
     // ----------------------- Demographics task------------------------
     var demographicsTask = RPAppTask(
       type: SurveyUserTask.SURVEY_TYPE,
