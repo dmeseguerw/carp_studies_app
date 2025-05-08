@@ -127,7 +127,6 @@ flutter:
     - assets/instructions/da/
     - assets/icons/
     - assets/lang/
-    - assets/carp/lang/
     - assets/carp/resources/
     - assets/images/messages/
     - assets/carp_logo.png

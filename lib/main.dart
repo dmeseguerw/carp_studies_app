@@ -9,10 +9,10 @@ import 'dart:io';
 
 import 'package:async/async.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/material.dart' hide TimeOfDay;
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -126,6 +126,10 @@ part 'ui/cards/media_card.dart';
 part 'ui/cards/scoreboard_card.dart';
 part 'ui/cards/study_progress_card.dart';
 part 'ui/cards/activity_card.dart';
+
+part 'sensing/study_protocol_manager.dart';
+part 'sensing/informed_consent.dart';
+part 'sensing/surveys.dart';
 
 part 'main.g.dart';
 
