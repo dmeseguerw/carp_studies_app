@@ -1,0 +1,1580 @@
+{
+ "applicationData": {
+  "studyDescription": {
+   "__type": "StudyDescription",
+   "title": "Fitness Recommender Data Collection",
+   "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life  regarding their heart rate, physical activity and lifestyle in order to investigate fitness levels.",
+   "purpose": "To collect basic data from users in their everyday life in order to investigate fitness levels.",
+   "responsible": {
+    "__type": "StudyResponsible",
+    "id": "msc_thesis_2025_s232888_s194725",
+    "name": "Daniel Meseguer / Mattias Tammi",
+    "title": "Students",
+    "email": "s232888@dtu.dk / s194725@dtu.dk"
+   }
+  },
+  "dataEndPoint": {
+   "__type": "SQLiteDataEndPoint",
+   "type": "SQLITE",
+   "dataFormat": "dk.cachet.carp"
+  }
+ },
+ "id": "51809903-bb7d-4e3f-a08b-815ce44cfb7c",
+ "createdOn": "2025-05-10T16:43:26.297022Z",
+ "version": 0,
+ "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life  regarding their heart rate, physical activity and lifestyle in order to investigate fitness levels.",
+ "ownerId": "alex@uni.dk",
+ "name": "Fitness Recommender Data Collection",
+ "participantRoles": [],
+ "primaryDevices": [
+  {
+   "__type": "dk.cachet.carp.common.application.devices.Smartphone",
+   "roleName": "Primary Phone",
+   "isOptional": false,
+   "defaultSamplingConfiguration": {},
+   "isPrimaryDevice": true
+  }
+ ],
+ "connectedDevices": [
+  {
+   "__type": "dk.cachet.carp.common.application.devices.PolarDevice",
+   "roleName": "Polar HR Sensor",
+   "isOptional": true,
+   "defaultSamplingConfiguration": {}
+  }
+ ],
+ "connections": [
+  {
+   "roleName": "Polar HR Sensor",
+   "connectedToRoleName": "Primary Phone"
+  }
+ ],
+ "assignedDevices": {},
+ "tasks": [
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.BackgroundTask",
+   "name": "Task #10",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.error"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.triggeredtask"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.completedtask"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.heartbeat"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.completedapptask"
+    }
+   ]
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.BackgroundTask",
+   "name": "Task #11",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.error"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.triggeredtask"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.completedtask"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.heartbeat"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.completedapptask"
+    }
+   ]
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "morning_survey_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Morning Survey",
+   "description": "A short survey on your sleep and morning mood.",
+   "instructions": "",
+   "minutesToComplete": 2,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "morning_survey",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "morning_instruction",
+      "title": "Morning Survey",
+      "text": "Please answer the following questions about your sleep and how you feel this morning.",
+      "optional": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "morning_sleep_duration",
+      "title": "How many hours did you sleep last night?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPIntegerAnswerFormat",
+       "minValue": 0,
+       "maxValue": 24,
+       "suffix": "hours",
+       "questionType": "Integer"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "morning_sleep_quality",
+      "title": "How would you rate your sleep quality?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very poor",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Poor",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Fair",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Good",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very good",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "morning_mood",
+      "title": "How do you feel this morning?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very bad",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Bad",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Neutral",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Good",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very good",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "morning_stress",
+      "title": "What is your current stress level?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very low",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Low",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Moderate",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "High",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very high",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPCompletionStep",
+      "identifier": "morning_completion",
+      "title": "Finished",
+      "text": "Thank you for completing the survey!",
+      "optional": false
+     }
+    ]
+   }
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "morning_heart_rate_measurement_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.hr"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Record Morning Heart Rate",
+   "description": "A short survey to record your heart rate.",
+   "instructions": "",
+   "minutesToComplete": 3,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "morning_heart_rate_measurement",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "morning_heart_rate_instruction",
+      "title": "Record Morning Heart Rate",
+      "text": "Please sit down for 3 minutes while we capture your heart rate measurements.",
+      "optional": false
+     },
+     {
+      "__type": "RPTimerStep",
+      "identifier": "morning_heart_rate_timer",
+      "title": "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+      "optional": false,
+      "timeout": 30000000,
+      "playSound": true,
+      "autoSkip": true,
+      "showTime": true
+     },
+     {
+      "__type": "RPCompletionStep",
+      "identifier": "morning_heart_rate_completion",
+      "title": "Finished",
+      "text": "Thank you for completing the measurement!",
+      "optional": false
+     }
+    ]
+   }
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "evening_survey_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Evening Survey",
+   "description": "A short survey on your evening well-being.",
+   "instructions": "",
+   "minutesToComplete": 1,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "evening_survey",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "evening_instruction",
+      "title": "Evening Survey",
+      "text": "In the following page, please answer the questions based on how you feel this evening. Please sit down comfortably and relax. Remember that there are no right or wrong answers.",
+      "optional": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "evening_fatigue",
+      "title": "What is your current level of fatigue?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very bad",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Bad",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Neutral",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Good",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very good",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "evening_mood",
+      "title": "What is your current mood level?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very bad",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Bad",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Neutral",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Good",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very good",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "evening_context_stress",
+      "title": "What is your current level of stress?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very bad",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Bad",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Neutral",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Good",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very good",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "evening_context_recovery",
+      "title": "How well do you feel you have recovered today?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very bad",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Bad",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Neutral",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Good",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very good",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPCompletionStep",
+      "identifier": "evening_completion",
+      "title": "Finished",
+      "text": "Thank you for taking the tests",
+      "optional": false
+     }
+    ]
+   }
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "preworkout_heart_rate_measurement_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.hr"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Pre Workout Heart Rate Measurement",
+   "description": "Please record your heart rate before the workout",
+   "instructions": "",
+   "minutesToComplete": 3,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "preworkout_heart_rate_measurement",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "preworkout_heart_rate_instruction",
+      "title": "Record Pre Workout Heart Rate",
+      "text": "Please sit down for 3 minutes while we capture your heart rate measurements.",
+      "optional": false
+     },
+     {
+      "__type": "RPTimerStep",
+      "identifier": "preworkout_heart_rate_timer",
+      "title": "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+      "optional": false,
+      "timeout": 30000000,
+      "playSound": true,
+      "autoSkip": true,
+      "showTime": true
+     },
+     {
+      "__type": "RPCompletionStep",
+      "identifier": "preworkout_heart_rate_completion",
+      "title": "Finished",
+      "text": "Thank you for completing the measurement!",
+      "optional": false
+     }
+    ]
+   }
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "postworkout_heart_rate_measurement_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.hr"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Post Workout Heart Rate Measurement",
+   "description": "Please record your heart rate after the workout",
+   "instructions": "",
+   "minutesToComplete": 3,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "postworkout_heart_rate_measurement",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "postworkout_heart_rate_instruction",
+      "title": "Record Post Workout Heart Rate",
+      "text": "Please sit down for 3 minutes while we capture your heart rate measurements.",
+      "optional": false
+     },
+     {
+      "__type": "RPTimerStep",
+      "identifier": "postworkout_heart_rate_timer",
+      "title": "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+      "optional": false,
+      "timeout": 30000000,
+      "playSound": true,
+      "autoSkip": true,
+      "showTime": true
+     },
+     {
+      "__type": "RPCompletionStep",
+      "identifier": "postworkout_heart_rate_completion",
+      "title": "Finished",
+      "text": "Thank you for completing the measurement!",
+      "optional": false
+     }
+    ]
+   }
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "post_workout_survey_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Post Workout Survey",
+   "description": "A short survey on your post workout mood.",
+   "instructions": "",
+   "minutesToComplete": 1,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "post_workout_survey",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "post_workout_instruction",
+      "title": "Post Workout Survey",
+      "text": "Please answer the following questions about your workout and how you feel after it.",
+      "optional": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "post_workout_exertion",
+      "title": "How would you rate your perceived exertion during the workout?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very low",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Low",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Moderate",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "High",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very high",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "post_workout_type",
+      "title": "What type of workout did you do?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Cardio",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Strength training",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Flexibility",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Balance",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Other",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "post_workout_intensity",
+      "title": "How would you rate the intensity of your workout?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very low",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Low",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Moderate",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "High",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very high",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "post_workout_duration",
+      "title": "How long was your workout?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Less than 15 minutes",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "15-30 minutes",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "30-45 minutes",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "45-60 minutes",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "More than 60 minutes",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "post_workout_emotional_state",
+      "title": "How do you feel after the workout?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "MultipleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Happy",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Sad",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Angry",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Relaxed",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Stressed",
+         "value": 5,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Excited",
+         "value": 6,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "MultipleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "post_workout_fatigue",
+      "title": "How fatigued do you feel after the workout?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very low",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Low",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Moderate",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "High",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very high",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "post_workout_energy",
+      "title": "How energetic do you feel after the workout?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Very low",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Low",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Moderate",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "High",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very high",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPCompletionStep",
+      "identifier": "post_workout_completion",
+      "title": "Finished",
+      "text": "Thank you for completing the survey!",
+      "optional": false
+     }
+    ]
+   }
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "demographics_survey_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Demographics",
+   "description": "A short 4-item survey on your background.",
+   "instructions": "",
+   "minutesToComplete": 2,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "demographics_survey",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_1",
+      "title": "Which is your biological sex?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Female",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Male",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Other",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Prefer not to say",
+         "value": 4,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_2",
+      "title": "How old are you?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "18-24",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "25-34",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "35-45",
+         "value": 3,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_3",
+      "title": "What is your height?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPIntegerAnswerFormat",
+       "minValue": 0,
+       "maxValue": 300,
+       "suffix": "cm",
+       "questionType": "Integer"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_4",
+      "title": "What is your weight?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPIntegerAnswerFormat",
+       "minValue": 0,
+       "maxValue": 300,
+       "suffix": "kg",
+       "questionType": "Integer"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_5",
+      "title": "What is your occupation?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Student",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Employed",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Unemployed",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Retired",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Prefer not to say",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_6",
+      "title": "How often do you exercise?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Sedentary (little or no exercise)",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Lightly active (light exercise/sports 1-3 days/week)",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Moderately active (moderate exercise/sports 3-5 days/week)",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Very active (hard exercise/sports 6-7 days a week)",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Super active (very hard exercise/sports & physical job)",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_7",
+      "title": "What types of exercise do you do?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "MultipleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Running",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Cycling",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Swimming",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Weightlifting",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Yoga",
+         "value": 5,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Other",
+         "value": 6,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "MultipleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_8",
+      "title": "How often do you consume alcohol?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Never",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Rarely (1-2 times a month)",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Occasionally (1-2 times a week)",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Frequently (3-4 times a week)",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Daily",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_9",
+      "title": "Do you have any of the following medical conditions?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "MultipleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "None",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Diabetes",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Hypertension",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Heart disease",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Respiratory disease",
+         "value": 5,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Neurological disorder",
+         "value": 6,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Other",
+         "value": 7,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "MultipleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     },
+     {
+      "__type": "RPQuestionStep",
+      "identifier": "demo_10",
+      "title": "How often do you smoke?",
+      "optional": false,
+      "answerFormat": {
+       "__type": "RPChoiceAnswerFormat",
+       "questionType": "SingleChoice",
+       "choices": [
+        {
+         "__type": "RPChoice",
+         "text": "Never",
+         "value": 1,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Occasionally (1-2 times a month)",
+         "value": 2,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Regularly (1-2 times a week)",
+         "value": 3,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Frequently (3-4 times a week)",
+         "value": 4,
+         "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Daily",
+         "value": 5,
+         "isFreeText": false
+        }
+       ],
+       "answerStyle": "SingleChoice"
+      },
+      "autoSkip": false,
+      "timeout": 0,
+      "autoFocus": false
+     }
+    ]
+   }
+  }
+ ],
+ "triggers": {
+  "0": {
+   "__type": "dk.cachet.carp.common.application.triggers.NoOpTrigger",
+   "sourceDeviceRoleName": "Primary Phone"
+  },
+  "1": {
+   "__type": "dk.cachet.carp.common.application.triggers.NoOpTrigger",
+   "sourceDeviceRoleName": "Polar HR Sensor"
+  },
+  "2": {
+   "__type": "dk.cachet.carp.common.application.triggers.RecurrentScheduledTrigger",
+   "sourceDeviceRoleName": "Polar HR Sensor",
+   "type": "daily",
+   "time": {
+    "hour": 6,
+    "minute": 0,
+    "second": 0
+   },
+   "separationCount": 0,
+   "maxNumberOfSampling": 14,
+   "period": 86400000000
+  },
+  "3": {
+   "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
+   "sourceDeviceRoleName": "Primary Phone",
+   "taskName": "morning_survey_task",
+   "triggerCondition": "done"
+  },
+  "4": {
+   "__type": "dk.cachet.carp.common.application.triggers.RecurrentScheduledTrigger",
+   "sourceDeviceRoleName": "Primary Phone",
+   "type": "daily",
+   "time": {
+    "hour": 17,
+    "minute": 10,
+    "second": 0
+   },
+   "separationCount": 0,
+   "maxNumberOfSampling": 14,
+   "period": 86400000000
+  },
+  "5": {
+   "__type": "dk.cachet.carp.common.application.triggers.NoUserTaskTrigger",
+   "sourceDeviceRoleName": "Polar HR Sensor",
+   "taskName": "preworkout_heart_rate_measurement_task"
+  },
+  "6": {
+   "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
+   "sourceDeviceRoleName": "Polar HR Sensor",
+   "taskName": "preworkout_heart_rate_measurement_task",
+   "triggerCondition": "dequeued"
+  },
+  "7": {
+   "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
+   "sourceDeviceRoleName": "Primary Phone",
+   "taskName": "postworkout_heart_rate_measurement_task",
+   "triggerCondition": "done"
+  },
+  "8": {
+   "__type": "dk.cachet.carp.common.application.triggers.OneTimeTrigger",
+   "sourceDeviceRoleName": "Primary Phone"
+  }
+ },
+ "taskControls": [
+  {
+   "triggerId": 0,
+   "taskName": "Task #10",
+   "destinationDeviceRoleName": "Primary Phone",
+   "control": "Start"
+  },
+  {
+   "triggerId": 1,
+   "taskName": "Task #11",
+   "destinationDeviceRoleName": "Polar HR Sensor",
+   "control": "Start"
+  },
+  {
+   "triggerId": 2,
+   "taskName": "morning_survey_task",
+   "destinationDeviceRoleName": "Polar HR Sensor",
+   "control": "Start"
+  },
+  {
+   "triggerId": 3,
+   "taskName": "morning_heart_rate_measurement_task",
+   "destinationDeviceRoleName": "Primary Phone",
+   "control": "Start"
+  },
+  {
+   "triggerId": 4,
+   "taskName": "evening_survey_task",
+   "destinationDeviceRoleName": "Primary Phone",
+   "control": "Start"
+  },
+  {
+   "triggerId": 5,
+   "taskName": "preworkout_heart_rate_measurement_task",
+   "destinationDeviceRoleName": "Polar HR Sensor",
+   "control": "Start"
+  },
+  {
+   "triggerId": 6,
+   "taskName": "postworkout_heart_rate_measurement_task",
+   "destinationDeviceRoleName": "Polar HR Sensor",
+   "control": "Start"
+  },
+  {
+   "triggerId": 7,
+   "taskName": "post_workout_survey_task",
+   "destinationDeviceRoleName": "Primary Phone",
+   "control": "Start"
+  },
+  {
+   "triggerId": 8,
+   "taskName": "demographics_survey_task",
+   "destinationDeviceRoleName": "Primary Phone",
+   "control": "Start"
+  }
+ ],
+ "expectedParticipantData": []
+}

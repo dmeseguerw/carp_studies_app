@@ -15,55 +15,154 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
     protocol.studyDescription = StudyDescription(
         title: 'Fitness Recommender Data Collection',
         description:
-            "With the Fitness Recommender Data Collection you can monitor your fitness health. "
-            "By using the phones sensors, including the microphone, it will try to monitor you breathing, heart rate, sleep, social contact to others, and your movement. "
-            "You will also be able to fill in a simple daily survey to help us understand how you're doing. "
-            "Before you start, please also fill in the demographics survey. ",
+            'This study is part of a master thesis project at the '
+            'Technical University of Denmark (DTU). The goal of this '
+            'study is to collect data from users in their everyday life '
+            ' regarding their heart rate, physical activity and lifestyle '
+            'in order to investigate fitness levels.',
         purpose:
             'To collect basic data from users in their everyday life in order '
             'to investigate fitness levels.',
         responsible: StudyResponsible(
-          id: 'dmeseguerw',
-          title: 'Student',
-          email: 's232888@dtu.dk',
-          name: 'Daniel Meseguer',
+          id: 'msc_thesis_2025_s232888_s194725',
+          title: 'Students',
+          email: 's232888@dtu.dk / s194725@dtu.dk',
+          name: 'Daniel Meseguer / Mattias Tammi',
         ));
 
     // Define the data end point , i.e., where to store data.
     // This example app only stores data locally in a SQLite DB
     protocol.dataEndPoint = SQLiteDataEndPoint();
-    
-    // Add firebase as a data end point.
-    // final FirebaseEndPoint firebaseEndPoint = FirebaseEndPoint(
-
-    // );
 
     // Define which devices are used for data collection.
     Smartphone phone = Smartphone();
     protocol.addPrimaryDevice(phone);
 
+    // Add polar device
+    PolarDevice polar = PolarDevice(roleName: 'Polar HR Sensor');
+    protocol.addConnectedDevice(polar, phone);
 
-    // Define the online location service and add it as a 'device'.
-    LocationService locationService = LocationService(
-      // used for debugging when the phone is laying still on the table
-      distance: 0,
+    //----------------------- Morning task------------------------
+    var morningSurveyTask = RPAppTask(
+      name: 'morning_survey_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: surveys.morning.title,
+      description: surveys.morning.description,
+      minutesToComplete: surveys.morning.minutesToComplete,
+      rpTask: surveys.morning.survey,
+      measures: [],
+      notification: true,
+    );
+    var morningHeartRateTask = RPAppTask(
+        name: 'morning_heart_rate_measurement_task',
+        type: SurveyUserTask.SURVEY_TYPE,
+        title: surveys.morningHeartRate.title,
+        description: surveys.morningHeartRate.description,
+        minutesToComplete: surveys.morningHeartRate.minutesToComplete,
+        rpTask: surveys.morningHeartRate.survey,
+        measures: [
+          Measure(type: PolarSamplingPackage.HR)
+        ],
+        notification: true,
+    );
+    protocol.addTaskControl(
+      RecurrentScheduledTrigger(
+        type: RecurrentType.daily,
+        time: const TimeOfDay(hour: 6, minute: 00),
+        maxNumberOfSampling: 14,
+      ),
+      morningSurveyTask,
+      polar,
     );
 
-    protocol.addConnectedDevice(locationService, phone);
-
-    // Add polar device
-    var polar = PolarDevice(roleName: 'Polar HR Sensor');
-    protocol.addConnectedDevice(polar, phone);
     protocol.addTaskControl(
-    ImmediateTrigger(),
-    BackgroundTask(measures: [
-      Measure(type: PolarSamplingPackage.HR),
-      // Measure(type: PolarSamplingPackage.ECG),
-    ]),
-    polar);
+      UserTaskTrigger(taskName: morningSurveyTask.name, triggerCondition: UserTaskState.done),
+      morningHeartRateTask,
+      phone,
+    );
+
+    //----------------------- Evening task------------------------
+    var eveningTask = RPAppTask(
+      name: 'evening_survey_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: surveys.evening.title,
+      description: surveys.evening.description,
+      minutesToComplete: surveys.evening.minutesToComplete,
+      rpTask: surveys.evening.survey,
+      measures: [],
+      notification: true,
+    );
+    protocol.addTaskControl(
+      RecurrentScheduledTrigger(
+        type: RecurrentType.daily,
+        time: const TimeOfDay(hour: 17, minute: 10),
+        maxNumberOfSampling: 14,
+      ),
+      eveningTask,
+      phone,
+    );
+
+  //-----------------------Post workout tasks------------------------
+    // Pre workout heart rate measurement
+    var preWorkoutHeartRateTask = RPAppTask(
+      name: 'preworkout_heart_rate_measurement_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: 'Pre Workout Heart Rate Measurement',
+      description: 'Please record your heart rate before the workout',
+      minutesToComplete: surveys.preWorkoutHeartRate.minutesToComplete,
+      rpTask: surveys.preWorkoutHeartRate.survey,
+      measures: [
+        Measure(type: PolarSamplingPackage.HR)
+      ],
+      notification: true,
+    );
+    protocol.addTaskControl(
+      NoUserTaskTrigger(taskName: preWorkoutHeartRateTask.name),
+      preWorkoutHeartRateTask,
+      polar,
+    );
+
+
+    // Post workout heart rate measurement
+    var postWorkoutHeartRateTask = RPAppTask(
+      name: 'postworkout_heart_rate_measurement_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: 'Post Workout Heart Rate Measurement',
+      description: 'Please record your heart rate after the workout',
+      minutesToComplete: surveys.postWorkoutHeartRate.minutesToComplete,
+      rpTask: surveys.postWorkoutHeartRate.survey,
+      measures: [
+        Measure(type: PolarSamplingPackage.HR)
+      ],
+      notification: true,
+    );
+    protocol.addTaskControl(
+      UserTaskTrigger(taskName: preWorkoutHeartRateTask.name, triggerCondition: UserTaskState.done),
+      postWorkoutHeartRateTask,
+      polar,
+    );
+
+    // Post workout survey
+    var postWorkoutTask = RPAppTask(
+      name: 'post_workout_survey_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: surveys.postWorkout.title,
+      description: surveys.postWorkout.description,
+      minutesToComplete: surveys.postWorkout.minutesToComplete,
+      rpTask: surveys.postWorkout.survey,
+      measures: [],
+      notification: true,
+    );
+    protocol.addTaskControl(
+      UserTaskTrigger(taskName: postWorkoutHeartRateTask.name, triggerCondition: UserTaskState.done),
+      postWorkoutTask,
+      phone,
+    );
+
 
     // ----------------------- Demographics task------------------------
     var demographicsTask = RPAppTask(
+      name: 'demographics_survey_task',
       type: SurveyUserTask.SURVEY_TYPE,
       title: surveys.demographics.title,
       description: surveys.demographics.description,
@@ -73,65 +172,8 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       notification: true,
     );
     protocol.addTaskControl(
-      ImmediateTrigger(),
+      OneTimeTrigger(),
       demographicsTask,
-      phone,
-    );
-
-    //----------------------- Morning task------------------------
-    var morningTask = RPAppTask(
-      type: SurveyUserTask.SURVEY_TYPE,
-      title: surveys.morning.title,
-      description: surveys.morning.description,
-      minutesToComplete: surveys.morning.minutesToComplete,
-      rpTask: surveys.morning.survey,
-      measures: [],
-      notification: true,
-    );
-
-    protocol.addTaskControl(
-      RecurrentScheduledTrigger(
-        type: RecurrentType.daily,
-        time: const TimeOfDay(hour: 7, minute: 00),
-      ),
-      morningTask,
-      phone,
-    );
-
-    //----------------------- Evening task------------------------
-    var eveningTask = RPAppTask(
-      type: SurveyUserTask.SURVEY_TYPE,
-      title: surveys.evening.title,
-      description: surveys.evening.description,
-      minutesToComplete: surveys.evening.minutesToComplete,
-      rpTask: surveys.evening.survey,
-      measures: [],
-      notification: true,
-    );
-
-    protocol.addTaskControl(
-      RecurrentScheduledTrigger(
-        type: RecurrentType.daily,
-        time: const TimeOfDay(hour: 21, minute: 00),
-      ),
-      eveningTask,
-      phone,
-    );
-
-    //-----------------------Post workout task------------------------
-    var postWorkoutTask = RPAppTask(
-      type: SurveyUserTask.SURVEY_TYPE,
-      title: surveys.postWorkout.title,
-      description: surveys.postWorkout.description,
-      minutesToComplete: surveys.postWorkout.minutesToComplete,
-      rpTask: surveys.postWorkout.survey,
-      measures: [],
-      notification: true,
-    );
-
-    protocol.addTaskControl(
-      NoUserTaskTrigger(taskName: 'Post Workout Survey'),
-      postWorkoutTask,
       phone,
     );
 

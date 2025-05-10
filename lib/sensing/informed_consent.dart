@@ -92,4 +92,8 @@ class InformedConsent {
 
     return _informedConsent!;
   }
+
+  Future<RPOrderedTask> getInformedConsent() async {
+    return informedConsent;
+  }
 }

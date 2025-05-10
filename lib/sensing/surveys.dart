@@ -15,6 +15,15 @@ class _Surveys {
 
   final Survey _postWorkout = _PostWorkoutSurvey();
   Survey get postWorkout => _postWorkout;
+
+  final Survey _morningHeartRate = _MorningHeartRateMeasurement();
+  Survey get morningHeartRate => _morningHeartRate;
+
+  final Survey _postWorkoutHeartRate = _PostWorkoutHeartRateMeasurement();
+  Survey get postWorkoutHeartRate => _postWorkoutHeartRate;
+
+  final Survey _preWorkoutHeartRate = _PreWorkoutHeartRateMeasurement();
+  Survey get preWorkoutHeartRate => _preWorkoutHeartRate;
 }
 
 /// An interface for an survey from the RP package.
@@ -147,7 +156,7 @@ class _DemographicSurvey implements Survey {
 
   @override
   RPTask get survey => RPOrderedTask(
-        identifier: "demo_survey",
+        identifier: "demographics_survey",
         steps: [
           RPQuestionStep(
             identifier: "demo_1",
@@ -296,7 +305,7 @@ class _EveningSurvey implements Survey {
   @override
   String get description => "A short survey on your evening well-being.";
   @override
-  int get minutesToComplete => 2;
+  int get minutesToComplete => 1;
 
   final RPChoiceAnswerFormat _eveningChoices = RPChoiceAnswerFormat(
       answerStyle: RPChoiceAnswerStyle.SingleChoice,
@@ -486,6 +495,109 @@ class _PostWorkoutSurvey implements Survey {
             identifier: 'post_workout_completion',
             title: 'Finished',
             text: 'Thank you for completing the survey!',
+          ),
+        ],
+      );
+}
+
+class _MorningHeartRateMeasurement implements Survey {
+  @override
+  String get title => "Record Morning Heart Rate";
+  @override
+  String get description => "A short survey to record your heart rate.";
+  @override
+  int get minutesToComplete => 3;
+
+  @override
+  RPTask get survey => RPOrderedTask(
+        identifier: "morning_heart_rate_measurement",
+        steps: [
+          RPInstructionStep(
+            identifier: 'morning_heart_rate_instruction',
+            title: "Record Morning Heart Rate",
+            text:
+                "Please sit down for 3 minutes while we capture your heart rate measurements.",
+          ),
+          RPTimerStep(
+            identifier: 'morning_heart_rate_timer',
+            title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+            timeout: const Duration(seconds: 30),
+            playSound: true,
+            autoSkip: true,
+          ),
+          RPCompletionStep(
+            identifier: 'morning_heart_rate_completion',
+            title: 'Finished',
+            text: 'Thank you for completing the measurement!',
+          ),
+
+        ],
+      );
+}
+
+class _PreWorkoutHeartRateMeasurement implements Survey {
+  @override
+  String get title => "Record Pre Workout Heart Rate";
+  @override
+  String get description => "A short task to record your heart rate.";
+  @override
+  int get minutesToComplete => 3;
+
+  @override
+  RPTask get survey => RPOrderedTask(
+        identifier: "preworkout_heart_rate_measurement",
+        steps: [
+          RPInstructionStep(
+            identifier: 'preworkout_heart_rate_instruction',
+            title: "Record Pre Workout Heart Rate",
+            text:
+                "Please sit down for 3 minutes while we capture your heart rate measurements.",
+          ),
+          RPTimerStep(
+            identifier: 'preworkout_heart_rate_timer',
+            title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+            timeout: const Duration(seconds: 30),
+            playSound: true,
+            autoSkip: true,
+          ),
+          RPCompletionStep(
+            identifier: 'preworkout_heart_rate_completion',
+            title: 'Finished',
+            text: 'Thank you for completing the measurement!',
+          ),
+        ],
+      );
+}
+
+class _PostWorkoutHeartRateMeasurement implements Survey {
+  @override
+  String get title => "Record Post Workout Heart Rate";
+  @override
+  String get description => "A short survey to record your heart rate.";
+  @override
+  int get minutesToComplete => 3;
+
+  @override
+  RPTask get survey => RPOrderedTask(
+        identifier: "postworkout_heart_rate_measurement",
+        steps: [
+          RPInstructionStep(
+            identifier: 'postworkout_heart_rate_instruction',
+            title: "Record Post Workout Heart Rate",
+            text:
+                "Please sit down for 3 minutes while we capture your heart rate measurements.",
+          ),
+          RPTimerStep(
+            identifier: 'postworkout_heart_rate_timer',
+            title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+            timeout: const Duration(seconds: 30),
+            playSound: true,
+            autoSkip: true,
+          ),
+          RPCompletionStep(
+            identifier: 'postworkout_heart_rate_completion',
+            title: 'Finished',
+            text: 'Thank you for completing the measurement!',
           ),
         ],
       );

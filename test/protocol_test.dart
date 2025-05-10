@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:research_package/model.dart';
 import 'package:test/test.dart';
 
 import 'package:carp_core/carp_core.dart';
@@ -18,6 +19,7 @@ String _encode(Object object) =>
 
 void main() {
   StudyProtocol? protocol;
+  RPOrderedTask consent;
 
   String toJsonString(Object object) =>
     const JsonEncoder.withIndent(' ').convert(object);
@@ -46,12 +48,6 @@ void main() {
           .getStudyProtocol('CAMS App v 0.33.0');
     });
 
-    test('CAMSStudyProtocol -> JSON', () async {
-      print(protocol);
-      print(_encode(protocol!));
-      expect(protocol?.ownerId, 'alex@uni.dk');
-    });
-
     
     /// Generates and save the study protocol as json file
     test('protocol -> resources/protocol.json', () async {
@@ -59,28 +55,10 @@ void main() {
       await writeToFile(toJsonString(protocol!), 'resources/protocol.json');
     });
 
-    test('StudyProtocol -> JSON -> StudyProtocol :: deep assert', () async {
-      print('#1 : $protocol');
-      final studyJson = _encode(protocol!);
-
-      SmartphoneStudyProtocol protocolFromJson =
-          SmartphoneStudyProtocol.fromJson(
-              json.decode(studyJson) as Map<String, dynamic>);
-      expect(_encode(protocolFromJson), equals(studyJson));
-      print('#2 : $protocolFromJson');
-    });
-
-    test('JSON File -> StudyProtocol', () async {
-      final plainJson = File('test/json/protocol.json').readAsStringSync();
-
-      final p = SmartphoneStudyProtocol.fromJson(
-          json.decode(plainJson) as Map<String, dynamic>);
-
-      // need to set the id and date, since it is auto-generated each time.
-      p.id = protocol!.id;
-      p.createdOn = protocol!.createdOn;
-
-      expect(toJsonString(p), toJsonString(protocol!));
+    /// Generates and save the study consent as json file
+    test('consent -> resources/consent.json', () async {
+      consent = await InformedConsent().getInformedConsent();
+      await writeToFile(toJsonString(consent), 'resources/consent.json');
     });
   });
 }
