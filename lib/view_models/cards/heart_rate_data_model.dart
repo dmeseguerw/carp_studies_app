@@ -26,16 +26,16 @@ class HeartRateCardViewModel extends SerializableViewModel<HourlyHeartRate> {
           0);
 
   /// Stream of heart rate based on [MovesenseHR] measures.
-  Stream<double>? get movesenseHRStream => controller?.measurements
-      .where((measurement) => measurement.data is MovesenseHR)
-      .map((measurement) => (measurement.data as MovesenseHR).hr);
+  /// Stream<double>? get movesenseHRStream => controller?.measurements
+  ///    .where((measurement) => measurement.data is MovesenseHR)
+  ///    .map((measurement) => (measurement.data as MovesenseHR).hr);
 
   @override
   void init(SmartphoneDeploymentController ctrl) {
     super.init(ctrl);
 
     if (polarHRStream != null) _group.add(polarHRStream!);
-    if (movesenseHRStream != null) _group.add(movesenseHRStream!);
+    /// if (movesenseHRStream != null) _group.add(movesenseHRStream!);
 
     heartRateStream?.listen(
       (hr) {

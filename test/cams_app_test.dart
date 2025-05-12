@@ -13,7 +13,7 @@ import 'package:carp_backend/carp_backend.dart';
 import 'package:research_package/research_package.dart';
 // import 'package:carp_webservices/carp_auth/carp_auth.dart';
 // import 'package:carp_webservices/carp_services/carp_services.dart';
-import 'package:carp_movesense_package/carp_movesense_package.dart';
+// import 'package:carp_movesense_package/carp_movesense_package.dart';
 
 import 'exports.dart';
 
@@ -35,7 +35,7 @@ void main() {
     // SamplingPackageRegistry().register(AppsSamplingPackage());
     SamplingPackageRegistry().register(ESenseSamplingPackage());
     SamplingPackageRegistry().register(PolarSamplingPackage());
-    SamplingPackageRegistry().register(MovesenseSamplingPackage());
+    // SamplingPackageRegistry().register(MovesenseSamplingPackage());
     SamplingPackageRegistry().register(SurveySamplingPackage());
   });
 

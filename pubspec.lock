@@ -289,14 +289,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.6"
-  carp_movesense_package:
-    dependency: "direct main"
-    description:
-      name: carp_movesense_package
-      sha256: ecf454337a4ef6ce2ce71516bb7544fb659c2fb64562b6f4ce3e303d1cc07f0c
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.7.5"
   carp_polar_package:
     dependency: "direct main"
     description:
@@ -1141,14 +1133,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
-  mdsflutter:
-    dependency: "direct main"
-    description:
-      name: mdsflutter
-      sha256: "32e31196ef02e4425e0745037993e548b12e8ec8231c5b27f239aba6426f8436"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
   meta:
     dependency: transitive
     description:
@@ -1557,14 +1541,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
-  protobuf:
-    dependency: transitive
-    description:
-      name: protobuf
-      sha256: "68645b24e0716782e58948f8467fd42a880f255096a821f9e7d0ec625b00c84d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.0"
   pub_semver:
     dependency: transitive
     description:

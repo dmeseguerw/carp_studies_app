@@ -124,7 +124,7 @@ const Map<String, String> _deviceTypeName = {
   LocationService.DEVICE_TYPE: "pages.devices.type.location.name",
   ESenseDevice.DEVICE_TYPE: "pages.devices.type.esense.name",
   PolarDevice.DEVICE_TYPE: "pages.devices.type.polar.name",
-  MovesenseDevice.DEVICE_TYPE: "pages.devices.type.movesense.name",
+  //MovesenseDevice.DEVICE_TYPE: "pages.devices.type.movesense.name",
   HealthService.DEVICE_TYPE: "pages.devices.type.health.name",
 };
 
@@ -135,7 +135,7 @@ const Map<String, String> _deviceTypeDescription = {
   LocationService.DEVICE_TYPE: "pages.devices.type.location.description",
   ESenseDevice.DEVICE_TYPE: "pages.devices.type.esense.description",
   PolarDevice.DEVICE_TYPE: "pages.devices.type.polar.description",
-  MovesenseDevice.DEVICE_TYPE: "pages.devices.type.movesense.description",
+  //MovesenseDevice.DEVICE_TYPE: "pages.devices.type.movesense.description",
   HealthService.DEVICE_TYPE: "pages.devices.type.health.description",
 };
 
@@ -167,11 +167,11 @@ const Map<String, Icon> _deviceTypeIcon = {
     size: 30,
     color: CACHET.RED,
   ),
-  MovesenseDevice.DEVICE_TYPE: Icon(
-    Icons.circle,
-    size: 30,
-    color: CACHET.GREY_1,
-  ),
+  ///MovesenseDevice.DEVICE_TYPE: Icon(
+  ///  Icons.circle,
+  ///  size: 30,
+  ///  color: CACHET.GREY_1,
+  ///),
   HealthService.DEVICE_TYPE: Icon(
     Icons.favorite_rounded,
     size: 30,
@@ -219,5 +219,5 @@ const Map<String, String> _deviceConnectionInstructions = {
   Smartphone.DEVICE_TYPE: "pages.devices.type.smartphone.instructions",
   ESenseDevice.DEVICE_TYPE: "pages.devices.type.esense.instructions",
   PolarDevice.DEVICE_TYPE: "pages.devices.type.polar.instructions",
-  MovesenseDevice.DEVICE_TYPE: "pages.devices.type.movesense.instructions",
+  /// MovesenseDevice.DEVICE_TYPE: "pages.devices.type.movesense.instructions",
 };

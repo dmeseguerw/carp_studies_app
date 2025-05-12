@@ -50,10 +50,7 @@ PODS:
     - FlutterMacOS
   - location (0.0.1):
     - Flutter
-  - mdsflutter (0.0.1):
-    - Flutter
-    - Movesense
-    - SwiftProtobuf
+
   - Movesense (3.27.0)
   - network_info_plus (0.0.1):
     - Flutter
@@ -117,7 +114,6 @@ DEPENDENCIES:
   - health (from `.symlinks/plugins/health/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/darwin`)
   - location (from `.symlinks/plugins/location/ios`)
-  - mdsflutter (from `.symlinks/plugins/mdsflutter/ios`)
   - Movesense (from `https://bitbucket.org/movesense/movesense-mobile-lib/`)
   - network_info_plus (from `.symlinks/plugins/network_info_plus/ios`)
   - oidc_ios (from `.symlinks/plugins/oidc_ios/ios`)
@@ -184,8 +180,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/just_audio/darwin"
   location:
     :path: ".symlinks/plugins/location/ios"
-  mdsflutter:
-    :path: ".symlinks/plugins/mdsflutter/ios"
+
   Movesense:
     :git: https://bitbucket.org/movesense/movesense-mobile-lib/
   network_info_plus:
@@ -246,7 +241,6 @@ SPEC CHECKSUMS:
   health: e739f88e8030f47660f93bf7af2ae775b01766dd
   just_audio: a42c63806f16995daf5b219ae1d679deb76e6a79
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
-  mdsflutter: 841344e0d5781afbbddd13e057e1cb2e9d86e012
   Movesense: 5ee7f342042aff32d24924b7f3fe4f2e86532522
   network_info_plus: 6613d9d7cdeb0e6f366ed4dbe4b3c51c52d567a9
   oidc_ios: e80c00b7089ae7cdc45ab9ed636fdaed3e01e6a1
