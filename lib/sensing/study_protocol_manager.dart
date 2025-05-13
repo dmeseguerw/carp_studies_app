@@ -10,7 +10,7 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
   Future<SmartphoneStudyProtocol> getStudyProtocol(String studyId) async {
     SmartphoneStudyProtocol protocol = SmartphoneStudyProtocol(
       name: 'Fitness Recommender Data Collection',
-      ownerId: 'alex@uni.dk',
+      ownerId: 's232888s194725',
     );
     protocol.studyDescription = StudyDescription(
         title: 'Fitness Recommender Data Collection',
@@ -34,6 +34,7 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
           title: 'Students',
           email: 's232888@dtu.dk / s194725@dtu.dk',
           name: 'Daniel Meseguer / Mattias Tammi',
+          affiliation: 'Technical University of Denmark',
         ),
         studyDescriptionUrl: 'https://drive.google.com/file/d/1vaTedUN_TMQ6xBX7O7Z4aMfZscVHLjQl/view?usp=sharing',
         privacyPolicyUrl: 'https://carp.dk/privacy-policy-service/',
