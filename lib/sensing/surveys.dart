@@ -24,6 +24,9 @@ class _Surveys {
 
   final Survey _preWorkoutHeartRate = _PreWorkoutHeartRateMeasurement();
   Survey get preWorkoutHeartRate => _preWorkoutHeartRate;
+
+  final Survey _workoutHeartRate = _WorkoutHeartRateMeasurement();
+  Survey get workoutHeartRate => _workoutHeartRate;
 }
 
 /// An interface for an survey from the RP package.
@@ -216,7 +219,7 @@ class _MorningSurvey implements Survey {
   @override
   String get title => "Morning Survey";
   @override
-  String get description => "A short survey on your sleep and morning mood.";
+  String get description => "Complete this survey when you wake up.";
   @override
   int get minutesToComplete => 2;
 
@@ -293,7 +296,7 @@ class _MorningSurvey implements Survey {
           RPCompletionStep(
             identifier: 'morning_completion',
             title: 'Finished',
-            text: 'Thank you for completing the survey!',
+            text: 'Thank you for completing the survey! \n\nPlease proceed to complete the morning heart rate measurement',
           ),
         ],
       );
@@ -303,7 +306,7 @@ class _EveningSurvey implements Survey {
   @override
   String get title => "Evening Survey";
   @override
-  String get description => "A short survey on your evening well-being.";
+  String get description => "Complete this survey before going to bed.";
   @override
   int get minutesToComplete => 1;
 
@@ -359,7 +362,7 @@ class _PostWorkoutSurvey implements Survey {
   @override
   String get title => "Post Workout Survey";
   @override
-  String get description => "A short survey on your post workout mood.";
+  String get description => "Complete this survey after your workout.";
   @override
   int get minutesToComplete => 1;
 
@@ -504,7 +507,7 @@ class _MorningHeartRateMeasurement implements Survey {
   @override
   String get title => "Record Morning Heart Rate";
   @override
-  String get description => "A short survey to record your heart rate.";
+  String get description => "Complete this survey when you wake up.";
   @override
   int get minutesToComplete => 3;
 
@@ -539,7 +542,7 @@ class _PreWorkoutHeartRateMeasurement implements Survey {
   @override
   String get title => "Record Pre Workout Heart Rate";
   @override
-  String get description => "A short task to record your heart rate.";
+  String get description => "Complete this task before your workout to measure your heart rate.";
   @override
   int get minutesToComplete => 3;
 
@@ -555,7 +558,7 @@ class _PreWorkoutHeartRateMeasurement implements Survey {
           ),
           RPTimerStep(
             identifier: 'preworkout_heart_rate_timer',
-            title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+            title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a measurement before your workout provides a relevant baseline into understanding your nervous responses.",
             timeout: const Duration(seconds: 30),
             playSound: true,
             autoSkip: true,
@@ -563,7 +566,7 @@ class _PreWorkoutHeartRateMeasurement implements Survey {
           RPCompletionStep(
             identifier: 'preworkout_heart_rate_completion',
             title: 'Finished',
-            text: 'Thank you for completing the measurement!',
+            text: 'Thank you for completing the measurement! \n\nPlease proceed to start the workout task and start your workout',
           ),
         ],
       );
@@ -573,7 +576,7 @@ class _PostWorkoutHeartRateMeasurement implements Survey {
   @override
   String get title => "Record Post Workout Heart Rate";
   @override
-  String get description => "A short survey to record your heart rate.";
+  String get description => "Complete this task after your workout to measure your heart rate.";
   @override
   int get minutesToComplete => 3;
 
@@ -589,7 +592,7 @@ class _PostWorkoutHeartRateMeasurement implements Survey {
           ),
           RPTimerStep(
             identifier: 'postworkout_heart_rate_timer',
-            title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
+            title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking your heart rate after your workout provides a relevant baseline into understanding your nervous responses.",
             timeout: const Duration(seconds: 30),
             playSound: true,
             autoSkip: true,
@@ -597,7 +600,34 @@ class _PostWorkoutHeartRateMeasurement implements Survey {
           RPCompletionStep(
             identifier: 'postworkout_heart_rate_completion',
             title: 'Finished',
-            text: 'Thank you for completing the measurement!',
+            text: 'Thank you for completing the measurement! \n\nPlease proceed to complete the post workout survey',
+          ),
+        ],
+      );
+}
+
+class _WorkoutHeartRateMeasurement implements Survey {
+  @override
+  String get title => "Record Workout Heart Rate";
+  @override
+  String get description => "Start this task when you start your workout to measure your heart rate.";
+  @override
+  int get minutesToComplete => 30;
+
+  @override
+  RPTask get survey => RPOrderedTask(
+        identifier: "workout_heart_rate_measurement",
+        steps: [
+          RPInstructionStep(
+            identifier: 'workout_heart_rate_instruction',
+            title: "Start Workout and Record Heart Rate",
+            text:
+                "Your workout session just started! When you are done with your workout come back to the app and click Next \n\nPlease remember to wear the heart rate monitor during your workout. \n\nHave a great workout!",
+          ),
+          RPCompletionStep(
+            identifier: 'workout_heart_rate_completion',
+            title: 'Finished',
+            text: 'Good job on your workout! \n\nPlease proceed to complete the post workout measurement',
           ),
         ],
       );

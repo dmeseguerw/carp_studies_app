@@ -18,11 +18,17 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
             'This study is part of a master thesis project at the '
             'Technical University of Denmark (DTU). The goal of this '
             'study is to collect data from users in their everyday life '
-            ' regarding their heart rate, physical activity and lifestyle '
-            'in order to investigate fitness levels.',
+            'to investigate how heart rate and lifestyle data can be used to '
+            'recommend fitness activities.'
+            'The study will be conducted across 14 days, where you will be asked to wear'
+            ' a Polar heart rate sensor and fill out short questionnaires.'
+            'The main components of the study are: \n'
+            '1. Daily morning and evening surveys, and post workout surveys to collect information about your '
+            'well-being \n'
+            '2. Heart rate measurements during the morning, and before, during, and after workouts.\n'
+            '3. A demographics survey to collect information about your background.\n',
         purpose:
-            'To collect basic data from users in their everyday life in order '
-            'to investigate fitness levels.',
+            'To collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.',
         responsible: StudyResponsible(
           id: 'msc_thesis_2025_s232888_s194725',
           title: 'Students',
@@ -102,13 +108,14 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       phone,
     );
 
-  //-----------------------Post workout tasks------------------------
+
+  //----------------------- Pre workout tasks------------------------
     // Pre workout heart rate measurement
     var preWorkoutHeartRateTask = RPAppTask(
       name: 'preworkout_heart_rate_measurement_task',
       type: SurveyUserTask.SURVEY_TYPE,
-      title: 'Pre Workout Heart Rate Measurement',
-      description: 'Please record your heart rate before the workout',
+      title: surveys.preWorkoutHeartRate.title,
+      description: surveys.preWorkoutHeartRate.description,
       minutesToComplete: surveys.preWorkoutHeartRate.minutesToComplete,
       rpTask: surveys.preWorkoutHeartRate.survey,
       measures: [
@@ -122,13 +129,36 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       polar,
     );
 
+  // ---------------------- Workout tasks ---------------------------
+    // Workout task
+    var workoutTask = RPAppTask(
+      name: 'workout_heart_rate_measurement_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: surveys.workoutHeartRate.title,
+      description: surveys.workoutHeartRate.description,
+      minutesToComplete: surveys.workoutHeartRate.minutesToComplete,
+      rpTask: surveys.workoutHeartRate.survey,
+      measures: [
+        Measure(type: PolarSamplingPackage.HR)
+      ],
+      notification: true,
+    );
+    protocol.addTaskControl(
+      UserTaskTrigger(taskName: preWorkoutHeartRateTask.name, triggerCondition: UserTaskState.done),
+      workoutTask,
+      polar,
+    );
+
+
+  //-----------------------Post workout tasks------------------------
+
 
     // Post workout heart rate measurement
     var postWorkoutHeartRateTask = RPAppTask(
       name: 'postworkout_heart_rate_measurement_task',
       type: SurveyUserTask.SURVEY_TYPE,
-      title: 'Post Workout Heart Rate Measurement',
-      description: 'Please record your heart rate after the workout',
+      title: surveys.postWorkoutHeartRate.title,
+      description: surveys.postWorkoutHeartRate.description,
       minutesToComplete: surveys.postWorkoutHeartRate.minutesToComplete,
       rpTask: surveys.postWorkoutHeartRate.survey,
       measures: [
@@ -137,7 +167,7 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       notification: true,
     );
     protocol.addTaskControl(
-      UserTaskTrigger(taskName: preWorkoutHeartRateTask.name, triggerCondition: UserTaskState.done),
+      UserTaskTrigger(taskName: workoutTask.name, triggerCondition: UserTaskState.done),
       postWorkoutHeartRateTask,
       polar,
     );
