@@ -48,26 +48,25 @@ class _DemographicSurvey implements Survey {
   @override
   String get title => "Demographics";
   @override
-  String get description => "A short 4-item survey on your background.";
+  String get description => "A short survey on your background.";
   @override
   int get minutesToComplete => 2;
 
   final RPChoiceAnswerFormat _sexChoices = RPChoiceAnswerFormat(
       answerStyle: RPChoiceAnswerStyle.SingleChoice,
       choices: [
-        RPChoice(text: "Female", value: 1),
-        RPChoice(text: "Male", value: 2),
-        RPChoice(text: "Other", value: 3),
-        RPChoice(text: "Prefer not to say", value: 4),
+      RPChoice(text: "Female", value: 1),
+      RPChoice(text: "Male", value: 2),
+      RPChoice(text: "Other", value: 3, isFreeText: true),
+      RPChoice(text: "Prefer not to say", value: 4),
       ]);
 
-  final RPChoiceAnswerFormat _ageChoices = RPChoiceAnswerFormat(
-      answerStyle: RPChoiceAnswerStyle.SingleChoice,
-      choices: [
-        RPChoice(text: "18-24", value: 1),
-        RPChoice(text: "25-34", value: 2),
-        RPChoice(text: "35-45", value: 3),
-      ]);
+
+  final RPIntegerAnswerFormat _ageChoices = RPIntegerAnswerFormat(
+    minValue: 0,
+    maxValue: 45,
+    suffix: "years"
+);
 
   // Height
   final RPIntegerAnswerFormat _heightChoices = RPIntegerAnswerFormat(
@@ -90,7 +89,9 @@ class _DemographicSurvey implements Survey {
         RPChoice(text: "Employed", value: 2),
         RPChoice(text: "Unemployed", value: 3),
         RPChoice(text: "Retired", value: 4),
-        RPChoice(text: "Prefer not to say", value: 5),
+        RPChoice(text: "Other", value: 5, isFreeText: true),
+        RPChoice(text: "Prefer not to say", value: 6),
+
       ]);
 
   // Fitness level (workout frequency)
@@ -117,7 +118,7 @@ class _DemographicSurvey implements Survey {
         RPChoice(text: "Swimming", value: 3),
         RPChoice(text: "Weightlifting", value: 4),
         RPChoice(text: "Yoga", value: 5),
-        RPChoice(text: "Other", value: 6),
+        RPChoice(text: "Other", value: 6, isFreeText: true),
       ]);
 
   // Alcohol consumption frequency
@@ -142,7 +143,7 @@ class _DemographicSurvey implements Survey {
         RPChoice(text: "Heart disease", value: 4),
         RPChoice(text: "Respiratory disease", value: 5),
         RPChoice(text: "Neurological disorder", value: 6),
-        RPChoice(text: "Other", value: 7),
+        RPChoice(text: "Other", value: 7, isFreeText: true),
       ]);
 
   // Smoke frequency

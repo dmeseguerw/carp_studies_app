@@ -3,8 +3,8 @@
   "studyDescription": {
    "__type": "StudyDescription",
    "title": "Fitness Recommender Data Collection",
-   "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life  regarding their heart rate, physical activity and lifestyle in order to investigate fitness levels.",
-   "purpose": "To collect basic data from users in their everyday life in order to investigate fitness levels.",
+   "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.The study will be conducted across 14 days, where you will be asked to wear a Polar heart rate sensor and fill out short questionnaires.The main components of the study are: \n1. Daily morning and evening surveys, and post workout surveys to collect information about your well-being \n2. Heart rate measurements during the morning, and before, during, and after workouts.\n3. A demographics survey to collect information about your background.\n",
+   "purpose": "To collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.",
    "responsible": {
     "__type": "StudyResponsible",
     "id": "msc_thesis_2025_s232888_s194725",
@@ -22,7 +22,7 @@
  "id": "0a08390e-e0a0-41c5-9eb8-28e49bd739b9",
  "createdOn": "2025-05-13T08:40:21.985440Z",
  "version": 0,
- "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life  regarding their heart rate, physical activity and lifestyle in order to investigate fitness levels.",
+ "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.The study will be conducted across 14 days, where you will be asked to wear a Polar heart rate sensor and fill out short questionnaires.The main components of the study are: \n1. Daily morning and evening surveys, and post workout surveys to collect information about your well-being \n2. Heart rate measurements during the morning, and before, during, and after workouts.\n3. A demographics survey to collect information about your background.\n",
  "ownerId": "alex@uni.dk",
  "name": "Fitness Recommender Data Collection",
  "participantRoles": [],
@@ -1085,7 +1085,7 @@
    ],
    "type": "survey",
    "title": "Demographics",
-   "description": "A short 4-item survey on your background.",
+   "description": "A short survey on your background.",
    "instructions": "",
    "minutesToComplete": 2,
    "notification": true,
@@ -1119,7 +1119,7 @@
          "__type": "RPChoice",
          "text": "Other",
          "value": 3,
-         "isFreeText": false
+         "isFreeText": true
         },
         {
          "__type": "RPChoice",
@@ -1140,29 +1140,11 @@
       "title": "How old are you?",
       "optional": false,
       "answerFormat": {
-       "__type": "RPChoiceAnswerFormat",
-       "questionType": "SingleChoice",
-       "choices": [
-        {
-         "__type": "RPChoice",
-         "text": "18-24",
-         "value": 1,
-         "isFreeText": false
-        },
-        {
-         "__type": "RPChoice",
-         "text": "25-34",
-         "value": 2,
-         "isFreeText": false
-        },
-        {
-         "__type": "RPChoice",
-         "text": "35-45",
-         "value": 3,
-         "isFreeText": false
-        }
-       ],
-       "answerStyle": "SingleChoice"
+       "__type": "RPIntegerAnswerFormat",
+       "minValue": 0,
+       "maxValue": 45,
+       "suffix": "years",
+       "questionType": "Integer"
       },
       "autoSkip": false,
       "timeout": 0,
@@ -1235,8 +1217,14 @@
         },
         {
          "__type": "RPChoice",
-         "text": "Prefer not to say",
+         "text": "Other",
          "value": 5,
+         "isFreeText": true
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Prefer not to say",
+         "value": 6,
          "isFreeText": false
         }
        ],
@@ -1335,7 +1323,7 @@
          "__type": "RPChoice",
          "text": "Other",
          "value": 6,
-         "isFreeText": false
+         "isFreeText": true
         }
        ],
        "answerStyle": "MultipleChoice"
@@ -1439,7 +1427,7 @@
          "__type": "RPChoice",
          "text": "Other",
          "value": 7,
-         "isFreeText": false
+         "isFreeText": true
         }
        ],
        "answerStyle": "MultipleChoice"
@@ -1548,6 +1536,7 @@
    "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
    "sourceDeviceRoleName": "Polar HR Sensor",
    "taskName": "preworkout_heart_rate_measurement_task",
+   "triggerCondition": "done"
    "triggerCondition": "done"
   },
   "7": {
