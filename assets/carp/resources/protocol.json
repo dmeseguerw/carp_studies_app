@@ -19,8 +19,8 @@
    "dataFormat": "dk.cachet.carp"
   }
  },
- "id": "0a08390e-e0a0-41c5-9eb8-28e49bd739b9",
- "createdOn": "2025-05-13T08:40:21.985440Z",
+ "id": "f16c742d-a6d0-41ff-836e-8e9635462401",
+ "createdOn": "2025-05-13T09:11:01.886040Z",
  "version": 0,
  "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.The study will be conducted across 14 days, where you will be asked to wear a Polar heart rate sensor and fill out short questionnaires.The main components of the study are: \n1. Daily morning and evening surveys, and post workout surveys to collect information about your well-being \n2. Heart rate measurements during the morning, and before, during, and after workouts.\n3. A demographics survey to collect information about your background.\n",
  "ownerId": "alex@uni.dk",
@@ -1484,6 +1484,87 @@
      }
     ]
    }
+  },
+  {
+   "__type": "dk.cachet.carp.common.application.tasks.RPAppTask",
+   "name": "baseline_test_task",
+   "measures": [
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.survey"
+    }
+   ],
+   "type": "survey",
+   "title": "Baseline Test",
+   "description": "Complete this test to measure your baseline.",
+   "instructions": "",
+   "minutesToComplete": 9,
+   "notification": true,
+   "rpTask": {
+    "__type": "RPOrderedTask",
+    "identifier": "baseline_test",
+    "closeAfterFinished": true,
+    "steps": [
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "baseline_test_instruction",
+      "title": "Baseline Test Sit Down",
+      "text": "Please sit down and continue to the next step. \n\nThis test will take approximately 3 minutes. \n\nPlease remember to wear the heart rate monitor during the test.",
+      "optional": false
+     },
+     {
+      "__type": "RPTimerStep",
+      "identifier": "baseline_test_timer",
+      "title": "Please sit down for 3 minutes while we capture your heart rate.",
+      "optional": false,
+      "timeout": 30000000,
+      "playSound": true,
+      "autoSkip": true,
+      "showTime": true
+     },
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "baseline_test_instruction_2",
+      "title": "Baseline Test Start Steps",
+      "text": "Please stand up. You will now need to step up and down from a step for 3 minutes. Continue to the next step when you are ready.",
+      "optional": false
+     },
+     {
+      "__type": "RPTimerStep",
+      "identifier": "baseline_test_timer_2",
+      "title": "Please step up and down from a step for 3 minutes.",
+      "optional": false,
+      "timeout": 30000000,
+      "playSound": true,
+      "autoSkip": true,
+      "showTime": true
+     },
+     {
+      "__type": "RPInstructionStep",
+      "identifier": "baseline_test_instruction_3",
+      "title": "Baseline Test Post Steps",
+      "text": "Please sit down and continue to the next step. We will measure your heart rate for 3 minutes.",
+      "optional": false
+     },
+     {
+      "__type": "RPTimerStep",
+      "identifier": "baseline_test_timer_3",
+      "title": "Please sit down for 3 minutes while we capture your heart rate.",
+      "optional": false,
+      "timeout": 30000000,
+      "playSound": true,
+      "autoSkip": true,
+      "showTime": true
+     },
+     {
+      "__type": "RPCompletionStep",
+      "identifier": "baseline_test_completion",
+      "title": "Finished",
+      "text": "Thank you for completing the test!",
+      "optional": false
+     }
+    ]
+   }
   }
  ],
  "triggers": {
@@ -1537,7 +1618,6 @@
    "sourceDeviceRoleName": "Polar HR Sensor",
    "taskName": "preworkout_heart_rate_measurement_task",
    "triggerCondition": "done"
-   "triggerCondition": "done"
   },
   "7": {
    "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
@@ -1552,6 +1632,10 @@
    "triggerCondition": "done"
   },
   "9": {
+   "__type": "dk.cachet.carp.common.application.triggers.OneTimeTrigger",
+   "sourceDeviceRoleName": "Primary Phone"
+  },
+  "10": {
    "__type": "dk.cachet.carp.common.application.triggers.OneTimeTrigger",
    "sourceDeviceRoleName": "Primary Phone"
   }
@@ -1614,6 +1698,12 @@
   {
    "triggerId": 9,
    "taskName": "demographics_survey_task",
+   "destinationDeviceRoleName": "Primary Phone",
+   "control": "Start"
+  },
+  {
+   "triggerId": 10,
+   "taskName": "baseline_test_task",
    "destinationDeviceRoleName": "Primary Phone",
    "control": "Start"
   }

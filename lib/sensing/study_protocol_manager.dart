@@ -208,6 +208,23 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
     );
 
 
+    // ------------------------ Baseline test task ------------------------
+    var baselineTestTask = RPAppTask(
+      name: 'baseline_test_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: surveys.baselineTest.title,
+      description: surveys.baselineTest.description,
+      minutesToComplete: surveys.baselineTest.minutesToComplete,
+      rpTask: surveys.baselineTest.survey,
+      measures: [],
+      notification: true,
+    );
+    protocol.addTaskControl(
+      OneTimeTrigger(),
+      baselineTestTask,
+      phone,
+    );
+
     return protocol;
   }
 

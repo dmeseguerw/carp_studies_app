@@ -27,6 +27,9 @@ class _Surveys {
 
   final Survey _workoutHeartRate = _WorkoutHeartRateMeasurement();
   Survey get workoutHeartRate => _workoutHeartRate;
+
+  final Survey _baselineTest = _BaselineTest();
+  Survey get baselineTest => _baselineTest;
 }
 
 /// An interface for an survey from the RP package.
@@ -629,6 +632,66 @@ class _WorkoutHeartRateMeasurement implements Survey {
             identifier: 'workout_heart_rate_completion',
             title: 'Finished',
             text: 'Good job on your workout! \n\nPlease proceed to complete the post workout measurement',
+          ),
+        ],
+      );
+}
+
+class _BaselineTest implements Survey {
+  @override
+  String get title => "Baseline Test";
+  @override
+  String get description => "Complete this test to measure your baseline.";
+  @override
+  int get minutesToComplete => 9;
+
+  @override
+  RPTask get survey => RPOrderedTask(
+        identifier: "baseline_test",
+        steps: [
+          RPInstructionStep(
+            identifier: 'baseline_test_instruction',
+            title: "Baseline Test Sit Down",
+            text:
+                "Please sit down and continue to the next step. \n\nThis test will take approximately 3 minutes. \n\nPlease remember to wear the heart rate monitor during the test.",
+          ),
+          RPTimerStep(
+            identifier: 'baseline_test_timer',
+            title: "Please sit down for 3 minutes while we capture your heart rate.",
+            timeout: const Duration(seconds: 30),
+            playSound: true,
+            autoSkip: true,
+          ),
+          RPInstructionStep(
+            identifier: 'baseline_test_instruction_2',
+            title: "Baseline Test Start Steps",
+            text:
+                "Please stand up. You will now need to step up and down from a step for 3 minutes. Continue to the next step when you are ready.",
+          ),
+          RPTimerStep(
+            identifier: 'baseline_test_timer_2',
+            title: "Please step up and down from a step for 3 minutes.",
+            timeout: const Duration(seconds: 30),
+            playSound: true,
+            autoSkip: true,
+          ),
+          RPInstructionStep(
+            identifier: 'baseline_test_instruction_3',
+            title: "Baseline Test Post Steps",
+            text:
+                "Please sit down and continue to the next step. We will measure your heart rate for 3 minutes.", 
+          ),
+          RPTimerStep(
+            identifier: 'baseline_test_timer_3',
+            title: "Please sit down for 3 minutes while we capture your heart rate.",
+            timeout: const Duration(seconds: 30),
+            playSound: true,
+            autoSkip: true,
+          ),
+          RPCompletionStep(
+            identifier: 'baseline_test_completion',
+            title: 'Finished',
+            text: 'Thank you for completing the test!',
           ),
         ],
       );
