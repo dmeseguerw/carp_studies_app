@@ -70,7 +70,6 @@ class InformedConsent {
         detailText: 
             "The first set of consent steps will touch on the following topics: General consent, Data Gathering, Privacy, and Time Commitment. You will be asked to review the information and agree to participate in the study. Please read the information carefully before you decide to take part in the study. If you have any questions, please contact us at: \ns194725@dtu.dk or\ns232888@dtu.dk",
         // footnote: "(1) Important footnote",
-        imagePath: "assets/images/waving-hand.png",
       );
 
       RPCompletionStep finalStep = RPCompletionStep(

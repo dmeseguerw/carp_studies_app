@@ -14,9 +14,6 @@ import 'package:cognition_package/cognition_package.dart';
 
 import 'package:carp_study_app/main.dart';
 
-String _encode(Object object) =>
-    const JsonEncoder.withIndent(' ').convert(object);
-
 void main() {
   StudyProtocol? protocol;
   RPOrderedTask consent;
@@ -42,12 +39,6 @@ void main() {
     SamplingPackageRegistry().register(SurveySamplingPackage());
   });
 
-  group("Local Study Protocol Manager", () {
-    setUp(() async {
-      protocol ??= await LocalStudyProtocolManager()
-          .getStudyProtocol('CAMS App v 0.33.0');
-    });
-
     
     /// Generates and save the study protocol as json file
     test('protocol -> resources/protocol.json', () async {
@@ -60,5 +51,4 @@ void main() {
       consent = await InformedConsent().getInformedConsent();
       await writeToFile(toJsonString(consent), 'resources/consent.json');
     });
-  });
-}
+  }
