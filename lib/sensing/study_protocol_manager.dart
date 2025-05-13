@@ -34,7 +34,10 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
           title: 'Students',
           email: 's232888@dtu.dk / s194725@dtu.dk',
           name: 'Daniel Meseguer / Mattias Tammi',
-        ));
+        ),
+        studyDescriptionUrl: 'https://drive.google.com/file/d/1vaTedUN_TMQ6xBX7O7Z4aMfZscVHLjQl/view?usp=sharing',
+        privacyPolicyUrl: 'https://carp.dk/privacy-policy-service/',
+      );
 
     // Define the data end point , i.e., where to store data.
     // This example app only stores data locally in a SQLite DB
