@@ -19,8 +19,8 @@
    "dataFormat": "dk.cachet.carp"
   }
  },
- "id": "51809903-bb7d-4e3f-a08b-815ce44cfb7c",
- "createdOn": "2025-05-10T16:43:26.297022Z",
+ "id": "e677e6b6-f896-4bf7-9834-75ec3094f1c5",
+ "createdOn": "2025-05-12T14:22:19.126477Z",
  "version": 0,
  "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life  regarding their heart rate, physical activity and lifestyle in order to investigate fitness levels.",
  "ownerId": "alex@uni.dk",
@@ -1044,7 +1044,7 @@
    ],
    "type": "survey",
    "title": "Demographics",
-   "description": "A short 4-item survey on your background.",
+   "description": "A short survey on your background.",
    "instructions": "",
    "minutesToComplete": 2,
    "notification": true,
@@ -1078,7 +1078,7 @@
          "__type": "RPChoice",
          "text": "Other",
          "value": 3,
-         "isFreeText": false
+         "isFreeText": true
         },
         {
          "__type": "RPChoice",
@@ -1099,29 +1099,11 @@
       "title": "How old are you?",
       "optional": false,
       "answerFormat": {
-       "__type": "RPChoiceAnswerFormat",
-       "questionType": "SingleChoice",
-       "choices": [
-        {
-         "__type": "RPChoice",
-         "text": "18-24",
-         "value": 1,
-         "isFreeText": false
-        },
-        {
-         "__type": "RPChoice",
-         "text": "25-34",
-         "value": 2,
-         "isFreeText": false
-        },
-        {
-         "__type": "RPChoice",
-         "text": "35-45",
-         "value": 3,
-         "isFreeText": false
-        }
-       ],
-       "answerStyle": "SingleChoice"
+       "__type": "RPIntegerAnswerFormat",
+       "minValue": 0,
+       "maxValue": 45,
+       "suffix": "years",
+       "questionType": "Integer"
       },
       "autoSkip": false,
       "timeout": 0,
@@ -1197,6 +1179,12 @@
          "text": "Prefer not to say",
          "value": 5,
          "isFreeText": false
+        },
+        {
+         "__type": "RPChoice",
+         "text": "Prefer not to say",
+         "value": 6,
+         "isFreeText": true
         }
        ],
        "answerStyle": "SingleChoice"
@@ -1294,7 +1282,7 @@
          "__type": "RPChoice",
          "text": "Other",
          "value": 6,
-         "isFreeText": false
+         "isFreeText": true
         }
        ],
        "answerStyle": "MultipleChoice"
@@ -1398,7 +1386,7 @@
          "__type": "RPChoice",
          "text": "Other",
          "value": 7,
-         "isFreeText": false
+         "isFreeText": true
         }
        ],
        "answerStyle": "MultipleChoice"
@@ -1507,7 +1495,7 @@
    "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
    "sourceDeviceRoleName": "Polar HR Sensor",
    "taskName": "preworkout_heart_rate_measurement_task",
-   "triggerCondition": "dequeued"
+   "triggerCondition": "done"
   },
   "7": {
    "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
