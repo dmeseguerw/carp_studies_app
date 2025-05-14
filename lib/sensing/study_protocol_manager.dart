@@ -220,13 +220,15 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       description: surveys.baselineTest.description,
       minutesToComplete: surveys.baselineTest.minutesToComplete,
       rpTask: surveys.baselineTest.survey,
-      measures: [],
+      measures: [
+        Measure(type: PolarSamplingPackage.HR)
+      ],
       notification: true,
     );
     protocol.addTaskControl(
       OneTimeTrigger(),
       baselineTestTask,
-      phone,
+      polar,
     );
 
     return protocol;
