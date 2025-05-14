@@ -5,21 +5,12 @@ part of '../main.dart';
 class LocalStudyProtocolManager implements StudyProtocolManager {
   @override
   Future<void> initialize() async {}
-
-  // Using the (default) data stream batch upload method
-  var streamingEndPoint = CarpDataEndPoint(
-    uploadInterval: 60,
-    onlyUploadOnWiFi: false,
-    deleteWhenUploaded: false,
-  );
-
   
 
   @override
   Future<SmartphoneStudyProtocol> getStudyProtocol(String studyId) async {
     SmartphoneStudyProtocol protocol = SmartphoneStudyProtocol(
       name: 'Fitness Recommender Data Collection',
-      dataEndPoint: streamingEndPoint,
     );
     protocol.studyDescription = StudyDescription(
         title: 'Fitness Recommender Data Collection',
@@ -49,9 +40,12 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
         privacyPolicyUrl: 'https://carp.dk/privacy-policy-service/',
       );
 
-    // Define the data end point , i.e., where to store data.
-    // This example app only stores data locally in a SQLite DB
-    // protocol.addDataEndPoint(streamingEndPoint);
+    protocol.dataEndPoint = CarpDataEndPoint(
+      uploadMethod: CarpUploadMethod.stream,
+      name: 'CARP Web Service (CAWS)',
+      uploadInterval: 60,
+      deleteWhenUploaded: false,
+    );
 
     final participant = 'Participant';
     protocol.participantRoles?.add(ParticipantRole(participant, false));
