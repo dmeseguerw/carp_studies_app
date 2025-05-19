@@ -47,8 +47,15 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       deleteWhenUploaded: false,
     );
 
-    final participant = 'Participant';
-    protocol.participantRoles?.add(ParticipantRole(participant, false));
+      // Always add a participant role to the protocol
+      const participant = 'Participant';
+      protocol.participantRoles?.add(ParticipantRole(participant));
+
+      // add expected participant data for the participant
+      protocol
+        .addExpectedParticipantData(ExpectedParticipantData(
+            attribute: ParticipantAttribute(inputDataType: InformedConsentInput.type),
+            assignedTo: AssignedTo(roleNames: {participant})));
 
     // Define which devices are used for data collection.
     Smartphone phone = Smartphone();
