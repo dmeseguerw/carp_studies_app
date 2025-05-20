@@ -528,7 +528,7 @@ class _MorningHeartRateMeasurement implements Survey {
           RPTimerStep(
             identifier: 'morning_heart_rate_timer',
             title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
-            timeout: const Duration(seconds: 30),
+            timeout: const Duration(seconds: 180),
             playSound: true,
             autoSkip: true,
           ),
@@ -563,7 +563,7 @@ class _PreWorkoutHeartRateMeasurement implements Survey {
           RPTimerStep(
             identifier: 'preworkout_heart_rate_timer',
             title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a measurement before your workout provides a relevant baseline into understanding your nervous responses.",
-            timeout: const Duration(seconds: 30),
+            timeout: const Duration(seconds: 180),
             playSound: true,
             autoSkip: true,
           ),
@@ -597,7 +597,7 @@ class _PostWorkoutHeartRateMeasurement implements Survey {
           RPTimerStep(
             identifier: 'postworkout_heart_rate_timer',
             title: "Please sit down for 3 minutes while we capture your heart rate measurements. Taking your heart rate after your workout provides a relevant baseline into understanding your nervous responses.",
-            timeout: const Duration(seconds: 30),
+            timeout: const Duration(seconds: 180),
             playSound: true,
             autoSkip: true,
           ),
@@ -658,7 +658,7 @@ class _BaselineTest implements Survey {
           RPTimerStep(
             identifier: 'baseline_test_timer',
             title: "Please sit down for 3 minutes while we capture your heart rate.",
-            timeout: const Duration(seconds: 30),
+            timeout: const Duration(seconds: 180),
             playSound: true,
             autoSkip: true,
           ),
@@ -671,7 +671,7 @@ class _BaselineTest implements Survey {
           RPTimerStep(
             identifier: 'baseline_test_timer_2',
             title: "Please step up and down from a step for 3 minutes.",
-            timeout: const Duration(seconds: 30),
+            timeout: const Duration(seconds: 180),
             playSound: true,
             autoSkip: true,
           ),
@@ -684,7 +684,7 @@ class _BaselineTest implements Survey {
           RPTimerStep(
             identifier: 'baseline_test_timer_3',
             title: "Please sit down for 3 minutes while we capture your heart rate.",
-            timeout: const Duration(seconds: 30),
+            timeout: const Duration(seconds: 180),
             playSound: true,
             autoSkip: true,
           ),

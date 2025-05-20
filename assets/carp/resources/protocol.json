@@ -21,18 +21,18 @@
    "type": "CAWS",
    "dataFormat": "dk.cachet.carp",
    "uploadMethod": "stream",
-   "name": "CARP Web Service (CAWS)",
+   "name": "CARP Web Service",
    "onlyUploadOnWiFi": false,
-   "uploadInterval": 60,
-   "deleteWhenUploaded": false,
+   "uploadInterval": 10,
+   "deleteWhenUploaded": true,
    "compress": true
   }
  },
- "id": "bc41687e-082f-4582-a7ff-b897838446de",
- "createdOn": "2025-05-19T15:01:31.866982Z",
+ "id": "1e50e84a-6b11-40e8-9120-dc3d96ee4b10",
+ "createdOn": "2025-05-20T17:48:40.752686Z",
  "version": 0,
  "description": "This study is part of a master thesis project at the Technical University of Denmark (DTU). The goal of this study is to collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.The study will be conducted across 14 days, where you will be asked to wear a Polar heart rate sensor and fill out short questionnaires.The main components of the study are: \n1. Daily morning and evening surveys, and post workout surveys to collect information about your well-being \n2. Heart rate measurements during the morning, and before, during, and after workouts.\n3. A demographics survey to collect information about your background.\n",
- "ownerId": "a3db0b14-4087-4ac9-8d4b-e8df68655e6f",
+ "ownerId": "1e50e84a-6b11-40e8-9120-dc3d96ee4b10",
  "name": "Fitness Recommender Data Collection",
  "participantRoles": [
   {
@@ -318,6 +318,18 @@
     },
     {
      "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ecg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppi"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
      "type": "dk.cachet.carp.survey"
     }
    ],
@@ -344,7 +356,7 @@
       "identifier": "morning_heart_rate_timer",
       "title": "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a morning measurement provides a relevant baseline into understanding your nervous responses.",
       "optional": false,
-      "timeout": 30000000,
+      "timeout": 180000000,
       "playSound": true,
       "autoSkip": true,
       "showTime": true
@@ -590,6 +602,18 @@
     },
     {
      "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ecg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppi"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
      "type": "dk.cachet.carp.survey"
     }
    ],
@@ -616,7 +640,7 @@
       "identifier": "preworkout_heart_rate_timer",
       "title": "Please sit down for 3 minutes while we capture your heart rate measurements. Taking a measurement before your workout provides a relevant baseline into understanding your nervous responses.",
       "optional": false,
-      "timeout": 30000000,
+      "timeout": 180000000,
       "playSound": true,
       "autoSkip": true,
       "showTime": true
@@ -641,6 +665,18 @@
     },
     {
      "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ecg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppi"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
      "type": "dk.cachet.carp.survey"
     }
    ],
@@ -648,7 +684,6 @@
    "title": "Record Workout Heart Rate",
    "description": "Start this task when you start your workout to measure your heart rate.",
    "instructions": "",
-   "minutesToComplete": 30,
    "notification": true,
    "rpTask": {
     "__type": "RPOrderedTask",
@@ -682,6 +717,18 @@
     },
     {
      "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ecg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppi"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
      "type": "dk.cachet.carp.survey"
     }
    ],
@@ -708,7 +755,7 @@
       "identifier": "postworkout_heart_rate_timer",
       "title": "Please sit down for 3 minutes while we capture your heart rate measurements. Taking your heart rate after your workout provides a relevant baseline into understanding your nervous responses.",
       "optional": false,
-      "timeout": 30000000,
+      "timeout": 180000000,
       "playSound": true,
       "autoSkip": true,
       "showTime": true
@@ -1509,6 +1556,18 @@
     },
     {
      "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ecg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppg"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+     "type": "dk.cachet.carp.polar.ppi"
+    },
+    {
+     "__type": "dk.cachet.carp.common.application.tasks.Measure.DataStream",
      "type": "dk.cachet.carp.survey"
     }
    ],
@@ -1535,7 +1594,7 @@
       "identifier": "baseline_test_timer",
       "title": "Please sit down for 3 minutes while we capture your heart rate.",
       "optional": false,
-      "timeout": 30000000,
+      "timeout": 180000000,
       "playSound": true,
       "autoSkip": true,
       "showTime": true
@@ -1552,7 +1611,7 @@
       "identifier": "baseline_test_timer_2",
       "title": "Please step up and down from a step for 3 minutes.",
       "optional": false,
-      "timeout": 30000000,
+      "timeout": 180000000,
       "playSound": true,
       "autoSkip": true,
       "showTime": true
@@ -1569,7 +1628,7 @@
       "identifier": "baseline_test_timer_3",
       "title": "Please sit down for 3 minutes while we capture your heart rate.",
       "optional": false,
-      "timeout": 30000000,
+      "timeout": 180000000,
       "playSound": true,
       "autoSkip": true,
       "showTime": true
@@ -1596,15 +1655,14 @@
   },
   "2": {
    "__type": "dk.cachet.carp.common.application.triggers.RecurrentScheduledTrigger",
-   "sourceDeviceRoleName": "Polar HR Sensor",
+   "sourceDeviceRoleName": "Primary Phone",
    "type": "daily",
    "time": {
-    "hour": 6,
+    "hour": 1,
     "minute": 0,
     "second": 0
    },
    "separationCount": 0,
-   "maxNumberOfSampling": 14,
    "period": 86400000000
   },
   "3": {
@@ -1619,27 +1677,26 @@
    "type": "daily",
    "time": {
     "hour": 17,
-    "minute": 10,
+    "minute": 0,
     "second": 0
    },
    "separationCount": 0,
-   "maxNumberOfSampling": 14,
    "period": 86400000000
   },
   "5": {
    "__type": "dk.cachet.carp.common.application.triggers.NoUserTaskTrigger",
-   "sourceDeviceRoleName": "Polar HR Sensor",
+   "sourceDeviceRoleName": "Primary Phone",
    "taskName": "preworkout_heart_rate_measurement_task"
   },
   "6": {
    "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
-   "sourceDeviceRoleName": "Polar HR Sensor",
+   "sourceDeviceRoleName": "Primary Phone",
    "taskName": "preworkout_heart_rate_measurement_task",
    "triggerCondition": "done"
   },
   "7": {
    "__type": "dk.cachet.carp.common.application.triggers.UserTaskTrigger",
-   "sourceDeviceRoleName": "Polar HR Sensor",
+   "sourceDeviceRoleName": "Primary Phone",
    "taskName": "workout_heart_rate_measurement_task",
    "triggerCondition": "done"
   },
@@ -1655,7 +1712,7 @@
   },
   "10": {
    "__type": "dk.cachet.carp.common.application.triggers.OneTimeTrigger",
-   "sourceDeviceRoleName": "Polar HR Sensor"
+   "sourceDeviceRoleName": "Primary Phone"
   }
  },
  "taskControls": [
@@ -1674,7 +1731,7 @@
   {
    "triggerId": 2,
    "taskName": "morning_survey_task",
-   "destinationDeviceRoleName": "Polar HR Sensor",
+   "destinationDeviceRoleName": "Primary Phone",
    "control": "Start"
   },
   {
@@ -1692,19 +1749,19 @@
   {
    "triggerId": 5,
    "taskName": "preworkout_heart_rate_measurement_task",
-   "destinationDeviceRoleName": "Polar HR Sensor",
+   "destinationDeviceRoleName": "Primary Phone",
    "control": "Start"
   },
   {
    "triggerId": 6,
    "taskName": "workout_heart_rate_measurement_task",
-   "destinationDeviceRoleName": "Polar HR Sensor",
+   "destinationDeviceRoleName": "Primary Phone",
    "control": "Start"
   },
   {
    "triggerId": 7,
    "taskName": "postworkout_heart_rate_measurement_task",
-   "destinationDeviceRoleName": "Polar HR Sensor",
+   "destinationDeviceRoleName": "Primary Phone",
    "control": "Start"
   },
   {
@@ -1722,7 +1779,7 @@
   {
    "triggerId": 10,
    "taskName": "baseline_test_task",
-   "destinationDeviceRoleName": "Polar HR Sensor",
+   "destinationDeviceRoleName": "Primary Phone",
    "control": "Start"
   }
  ],

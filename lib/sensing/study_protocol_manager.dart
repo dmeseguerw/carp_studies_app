@@ -1,69 +1,79 @@
 part of '../main.dart';
 
-/// This is a simple local [StudyProtocolManager] which
-/// creates the Fitness Recommender Data Collection study protocol.
+/// The local [StudyProtocolManager].
+///
+/// This is used for loading the [StudyProtocol] from a local in-memory
+/// Dart definition.
 class LocalStudyProtocolManager implements StudyProtocolManager {
-  @override
-  Future<void> initialize() async {}
-  
+  SmartphoneStudyProtocol? _protocol;
 
+  /// A protocol for demo purposes.
+  ///
+  ///  * Passive sensing [light, noise, memory, screen, activity, location, weather, air_quality]
+  ///  * User tasks [demographics, WHO-5, audio/reading]
   @override
-  Future<SmartphoneStudyProtocol> getStudyProtocol(String studyId) async {
-    SmartphoneStudyProtocol protocol = SmartphoneStudyProtocol(
+  Future<SmartphoneStudyProtocol?> getStudyProtocol(String studyId) async {
+    if (_protocol == null) {
+      _protocol = SmartphoneStudyProtocol(
       name: 'Fitness Recommender Data Collection',
-    );
-    protocol.studyDescription = StudyDescription(
-        title: 'Fitness Recommender Data Collection',
-        description:
-            'This study is part of a master thesis project at the '
-            'Technical University of Denmark (DTU). The goal of this '
-            'study is to collect data from users in their everyday life '
-            'to investigate how heart rate and lifestyle data can be used to '
-            'recommend fitness activities.'
-            'The study will be conducted across 14 days, where you will be asked to wear'
-            ' a Polar heart rate sensor and fill out short questionnaires.'
-            'The main components of the study are: \n'
-            '1. Daily morning and evening surveys, and post workout surveys to collect information about your '
-            'well-being \n'
-            '2. Heart rate measurements during the morning, and before, during, and after workouts.\n'
-            '3. A demographics survey to collect information about your background.\n',
-        purpose:
-            'To collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.',
-        responsible: StudyResponsible(
-          id: 'msc_thesis_2025_s232888_s194725',
-          title: 'Students',
-          email: 's232888@dtu.dk / s194725@dtu.dk',
-          name: 'Daniel Meseguer / Mattias Tammi',
-          affiliation: 'Technical University of Denmark',
-        ),
-        studyDescriptionUrl: 'https://drive.google.com/file/d/1vaTedUN_TMQ6xBX7O7Z4aMfZscVHLjQl/view?usp=sharing',
-        privacyPolicyUrl: 'https://carp.dk/privacy-policy-service/',
+        // Note that CAWS require a UUID for ownerId.
+        // You can put anything here (as long as it is a valid UUID), and this will be replaced with
+        // the ID of the user uploading the protocol.
       );
 
-    protocol.dataEndPoint = CarpDataEndPoint(
-      uploadMethod: CarpUploadMethod.stream,
-      name: 'CARP Web Service (CAWS)',
-      uploadInterval: 60,
-      deleteWhenUploaded: false,
-    );
+      // add the localized description
+      _protocol!.studyDescription = StudyDescription(
+          title: 'Fitness Recommender Data Collection',
+          description:
+              'This study is part of a master thesis project at the '
+              'Technical University of Denmark (DTU). The goal of this '
+              'study is to collect data from users in their everyday life '
+              'to investigate how heart rate and lifestyle data can be used to '
+              'recommend fitness activities.'
+              'The study will be conducted across 14 days, where you will be asked to wear'
+              ' a Polar heart rate sensor and fill out short questionnaires.'
+              'The main components of the study are: \n'
+              '1. Daily morning and evening surveys, and post workout surveys to collect information about your '
+              'well-being \n'
+              '2. Heart rate measurements during the morning, and before, during, and after workouts.\n'
+              '3. A demographics survey to collect information about your background.\n',
+          purpose:
+              'To collect data from users in their everyday life to investigate how heart rate and lifestyle data can be used to recommend fitness activities.',
+          responsible: StudyResponsible(
+            id: 'msc_thesis_2025_s232888_s194725',
+            title: 'Students',
+            email: 's232888@dtu.dk / s194725@dtu.dk',
+            name: 'Daniel Meseguer / Mattias Tammi',
+            affiliation: 'Technical University of Denmark',
+          ),
+          studyDescriptionUrl: 'https://drive.google.com/file/d/1vaTedUN_TMQ6xBX7O7Z4aMfZscVHLjQl/view?usp=sharing',
+          privacyPolicyUrl: 'https://carp.dk/privacy-policy-service/',
+        );
+
+
+      // add CAWS as the data endpoint
+      //  * upload data as a stream
+      _protocol!.dataEndPoint = CarpDataEndPoint(
+        uploadMethod: CarpUploadMethod.stream,
+        name: 'CARP Web Service',
+      );
 
       // Always add a participant role to the protocol
       const participant = 'Participant';
-      protocol.participantRoles?.add(ParticipantRole(participant));
+      _protocol?.participantRoles?.add(ParticipantRole(participant));
 
       // add expected participant data for the participant
-      protocol
-        .addExpectedParticipantData(ExpectedParticipantData(
+      _protocol?.addExpectedParticipantData(ExpectedParticipantData(
             attribute: ParticipantAttribute(inputDataType: InformedConsentInput.type),
             assignedTo: AssignedTo(roleNames: {participant})));
 
-    // Define which devices are used for data collection.
-    Smartphone phone = Smartphone();
-    protocol.addPrimaryDevice(phone);
+      // Define which devices are used for data collection.
+      final phone = Smartphone();
+      _protocol!.addPrimaryDevice(phone);
 
-    // Add polar device
+      // Add polar device
     PolarDevice polar = PolarDevice(roleName: 'Polar HR Sensor');
-    protocol.addConnectedDevice(polar, phone);
+    _protocol!.addConnectedDevice(polar, phone);
 
     //----------------------- Morning task------------------------
     var morningSurveyTask = RPAppTask(
@@ -84,21 +94,23 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
         minutesToComplete: surveys.morningHeartRate.minutesToComplete,
         rpTask: surveys.morningHeartRate.survey,
         measures: [
-          Measure(type: PolarSamplingPackage.HR)
+          Measure(type: PolarSamplingPackage.HR),
+          Measure(type: PolarSamplingPackage.ECG),
+          Measure(type: PolarSamplingPackage.PPG),
+          Measure(type: PolarSamplingPackage.PPI),
         ],
         notification: true,
     );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       RecurrentScheduledTrigger(
         type: RecurrentType.daily,
-        time: const TimeOfDay(hour: 6, minute: 00),
-        maxNumberOfSampling: 14,
+        time: const TimeOfDay(hour: 1, minute: 00),
       ),
       morningSurveyTask,
-      polar,
+      phone,
     );
 
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       UserTaskTrigger(taskName: morningSurveyTask.name, triggerCondition: UserTaskState.done),
       morningHeartRateTask,
       phone,
@@ -115,11 +127,10 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       measures: [],
       notification: true,
     );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       RecurrentScheduledTrigger(
         type: RecurrentType.daily,
-        time: const TimeOfDay(hour: 17, minute: 10),
-        maxNumberOfSampling: 14,
+        time: const TimeOfDay(hour: 17, minute: 00),
       ),
       eveningTask,
       phone,
@@ -127,6 +138,18 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
 
 
   //----------------------- Pre workout tasks------------------------
+
+  // Post workout survey
+    var postWorkoutTask = RPAppTask(
+      name: 'post_workout_survey_task',
+      type: SurveyUserTask.SURVEY_TYPE,
+      title: surveys.postWorkout.title,
+      description: surveys.postWorkout.description,
+      minutesToComplete: surveys.postWorkout.minutesToComplete,
+      rpTask: surveys.postWorkout.survey,
+      measures: [],
+      notification: true,
+    );
     // Pre workout heart rate measurement
     var preWorkoutHeartRateTask = RPAppTask(
       name: 'preworkout_heart_rate_measurement_task',
@@ -136,14 +159,18 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       minutesToComplete: surveys.preWorkoutHeartRate.minutesToComplete,
       rpTask: surveys.preWorkoutHeartRate.survey,
       measures: [
-        Measure(type: PolarSamplingPackage.HR)
+          Measure(type: PolarSamplingPackage.HR),
+          Measure(type: PolarSamplingPackage.ECG),
+          Measure(type: PolarSamplingPackage.PPG),
+          Measure(type: PolarSamplingPackage.PPI),
       ],
       notification: true,
     );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
+      // UserTaskTrigger(taskName: preWorkoutHeartRateTask.name, triggerCondition: UserTaskState.done),
       NoUserTaskTrigger(taskName: preWorkoutHeartRateTask.name),
       preWorkoutHeartRateTask,
-      polar,
+      phone,
     );
 
   // ---------------------- Workout tasks ---------------------------
@@ -153,17 +180,20 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       type: SurveyUserTask.SURVEY_TYPE,
       title: surveys.workoutHeartRate.title,
       description: surveys.workoutHeartRate.description,
-      minutesToComplete: surveys.workoutHeartRate.minutesToComplete,
+      // minutesToComplete: surveys.workoutHeartRate.minutesToComplete,
       rpTask: surveys.workoutHeartRate.survey,
       measures: [
-        Measure(type: PolarSamplingPackage.HR)
+          Measure(type: PolarSamplingPackage.HR),
+          Measure(type: PolarSamplingPackage.ECG),
+          Measure(type: PolarSamplingPackage.PPG),
+          Measure(type: PolarSamplingPackage.PPI),
       ],
       notification: true,
     );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       UserTaskTrigger(taskName: preWorkoutHeartRateTask.name, triggerCondition: UserTaskState.done),
       workoutTask,
-      polar,
+      phone,
     );
 
 
@@ -179,28 +209,20 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       minutesToComplete: surveys.postWorkoutHeartRate.minutesToComplete,
       rpTask: surveys.postWorkoutHeartRate.survey,
       measures: [
-        Measure(type: PolarSamplingPackage.HR)
+          Measure(type: PolarSamplingPackage.HR),
+          Measure(type: PolarSamplingPackage.ECG),
+          Measure(type: PolarSamplingPackage.PPG),
+          Measure(type: PolarSamplingPackage.PPI),
       ],
       notification: true,
     );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       UserTaskTrigger(taskName: workoutTask.name, triggerCondition: UserTaskState.done),
       postWorkoutHeartRateTask,
-      polar,
+      phone,
     );
 
-    // Post workout survey
-    var postWorkoutTask = RPAppTask(
-      name: 'post_workout_survey_task',
-      type: SurveyUserTask.SURVEY_TYPE,
-      title: surveys.postWorkout.title,
-      description: surveys.postWorkout.description,
-      minutesToComplete: surveys.postWorkout.minutesToComplete,
-      rpTask: surveys.postWorkout.survey,
-      measures: [],
-      notification: true,
-    );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       UserTaskTrigger(taskName: postWorkoutHeartRateTask.name, triggerCondition: UserTaskState.done),
       postWorkoutTask,
       phone,
@@ -218,7 +240,7 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       measures: [],
       notification: true,
     );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       OneTimeTrigger(),
       demographicsTask,
       phone,
@@ -234,21 +256,27 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       minutesToComplete: surveys.baselineTest.minutesToComplete,
       rpTask: surveys.baselineTest.survey,
       measures: [
-        Measure(type: PolarSamplingPackage.HR)
+          Measure(type: PolarSamplingPackage.HR),
+          Measure(type: PolarSamplingPackage.ECG),
+          Measure(type: PolarSamplingPackage.PPG),
+          Measure(type: PolarSamplingPackage.PPI),
       ],
       notification: true,
     );
-    protocol.addTaskControl(
+    _protocol!.addTaskControl(
       OneTimeTrigger(),
       baselineTestTask,
-      polar,
+      phone,
     );
+    }
 
-    return protocol;
+    return _protocol;
   }
+  @override
+  Future initialize() async {}
 
   @override
-  Future<bool> saveStudyProtocol(String studyId, StudyProtocol protocol) async {
+  Future<bool> saveStudyProtocol(String studyId, SmartphoneStudyProtocol protocol) async {
     throw UnimplementedError();
   }
 }
