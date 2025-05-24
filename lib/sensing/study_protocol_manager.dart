@@ -53,10 +53,12 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
 
       // add CAWS as the data endpoint
       //  * upload data as a stream
-      _protocol!.dataEndPoint = CarpDataEndPoint(
-        uploadMethod: CarpUploadMethod.stream,
-        name: 'CARP Web Service',
-      );
+      // _protocol!.dataEndPoint = CarpDataEndPoint(
+      //   uploadMethod: CarpUploadMethod.stream,
+      //   name: 'CARP Web Service',
+      // );
+
+      _protocol!.dataEndPoint = SQLiteDataEndPoint();
 
       // Always add a participant role to the protocol
       const participant = 'Participant';
@@ -74,6 +76,16 @@ class LocalStudyProtocolManager implements StudyProtocolManager {
       // Add polar device
     PolarDevice polar = PolarDevice(roleName: 'Polar HR Sensor');
     _protocol!.addConnectedDevice(polar, phone);
+
+    _protocol!.addTaskControl(
+    ImmediateTrigger(),
+    BackgroundTask(measures: [
+          Measure(type: PolarSamplingPackage.HR),
+          Measure(type: PolarSamplingPackage.ECG),
+          Measure(type: PolarSamplingPackage.PPG),
+          Measure(type: PolarSamplingPackage.PPI),
+    ]),
+    polar);
 
     //----------------------- Morning task------------------------
     var morningSurveyTask = RPAppTask(
